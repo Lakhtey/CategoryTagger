@@ -1,0 +1,163 @@
+﻿<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ArchCorp DataMash</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="search.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+    <link href="search.css" rel="stylesheet">
+    <style>
+        .card-body {
+            padding: 0.50rem !important;
+        }
+        #spnTotalCount{
+            color:red
+        }
+
+        .center {
+  text-align: center;
+  margin-left: 30%;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    width: 100% !important;
+}
+
+.select2-container {
+    width: 264px !important;
+}
+
+.apply-btn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color:#28a745;
+}
+
+.filter-btn {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.filter-btn:hover {
+  background-color: #007bff; /* Green */
+  cursor: pointer;
+}
+
+    </style>
+</head>
+
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="row" style="margin-top: 45%;margin-left: 1%;">
+            <div class="col-md-12">
+                    Documents <select id="drpDocuments" name="documents" multiple="multiple"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-link apply-btn applySearch" id="btnApply"><i class="fas fa-check"></i> Apply</button>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div id="main">
+
+    <h1 align="center">Archcorp DataMash<!--Discover Authority Guidelines--></h1>
+    <div style="margin-left: 90%"><span>Total Results: </span><span id="spnTotalCount">0</span></div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form class="card card-sm">
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col" style="margin-right: 0.5%;">
+                            <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Example: (cable AND trays) OR (cable AND tray)" id="txtTopRecommendations">
+                        </div>
+                        <div class="col-auto" style="margin-right: 0.5%;">
+                            <button id="searchMe1" class="btn btn-lg btn-success applySearch" type="button"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="col-auto">
+                            <button id="filterResults" class="btn btn-lg btn-success filter-btn" type="button" onclick="openNav()"><i class="fas fa-filter"></i></button>
+                        </div>
+
+                    </div>
+                </form>
+                
+
+            </div>
+            <img id="imgSearching" src="rolling.gif" alt="Loading" title="Loading" width="50" height="50" style="margin-top: 5px;display: none">
+           
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4"></div>
+            <div class="col-md-2"><!-- Default unchecked -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="chkExactSearch">
+                    <label class="custom-control-label" for="chkExactSearch"></label>Exact Search</label>
+                </div>
+            </div>
+            <div class="col-md-2"><!-- Default unchecked -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="chkQnA">
+                    <label class="custom-control-label" for="chkQnA">QnA</label>
+                </div></div>
+            <div class="col-md-4"></div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-12">
+                       
+                                <div class="card card-default">
+                                  <div class="card-header">
+                                    <h4 class="card-title">
+                                      <a data-toggle="collapse" href="#collapse1" style="color: #28a745">Filters</a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapse1" class="card-collapse collapse">
+                                    <div class="card-body">
+                                            <select id="drpDocuments" name="documents" multiple="multiple"></select>
+                                    </div>
+                                  
+                                  </div>
+                                </div>
+
+                        
+                
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="result1">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button type="button" id="btnShowMore" class="btn btn-primary center" onclick="showMoreResults()">Show More</button>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="words" style="overflow-wrap: break-word;padding-top: 5px;padding-bottom: 5px;overflow-y: auto;height: 100%">
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</body>
+
+</html>

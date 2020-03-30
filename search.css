@@ -1,0 +1,33 @@
+.card-body {
+     padding: 0.50rem !important;
+ }
+ #spnTotalCount{
+     color:red
+ }
+ #main {
+ text-align: center;
+ }
+ #mainheader{
+     margin-bottom: 20px;
+     text-align: center;
+     font-family: 'Raleway', sans-serif;
+ }
+ #mainbutton {
+     display: block;
+     margin: 35px auto;
+ }
+ .button-xlarge {
+     font-size: 125%;
+     width:350px;
+     background: rgb(66, 184, 221); /* this is a light blue */
+ }
+ input[type="submit"], #txtParagraph {
+     display: inline;
+     vertical-align: middle;
+     margin-top: 35px;
+     }
+ .left{
+     float: left;
+     text-align: left;
+     }
+ ul { display:table; margin:0 auto;}
